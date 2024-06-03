@@ -57,8 +57,8 @@ Note: The above data points should be the *only* data returned by the query. Sub
 
 **CHALLENGE 4:**
 
-Given the included jinja2 template, write a python script that usese GraphQL to query the above data, then renders a BGP configuration section via jinja2.
-Submit the resulting configuration text to CTFd.
+Given the included jinja2 template, write a python script that usese GraphQL to query the above data for the device named "leaf1", then renders a BGP configuration section via jinja2.
+Submit the resulting configuration file to CTFd.
 
 ## Development Environment
 Note that this repo uses [[Poetry](https://python-poetry.org/)] to manage dependencies. Follow [[instructions](https://python-poetry.org/docs/#installing-with-pipx)] to install, then run the following to activate a venv with needed dependencies (ensure you are in this directory)

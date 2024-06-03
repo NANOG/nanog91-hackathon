@@ -1,0 +1,15 @@
+router bgp {{ local_asn }}
+   no bgp default ipv4-unicast
+   maximum-paths 8 ecmp 64
+   neighbor SPINE peer group
+   neighbor SPINE send-community extended
+   neighbor SPINE_IP6 peer group
+   neighbor SPINE_IP6 send-community extended
+{%- for neighbor in bgp_neighbors.bgp_neighbors_ip4 %}
+   neighbor {{ neighbor.addr }} peer group SPINE
+   neighbor {{ neighbor.addr }} remote-as {{ neighbor.asn }}
+   {%- endfor %}
+{%- for neighbor in bgp_neighbors.bgp_neighbors_ip6 %}
+   neighbor {{ neighbor.addr }} peer group SPINE_IP6
+   neighbor {{ neighbor.addr }} remote-as {{ neighbor.asn }}
+{%- endfor %}
