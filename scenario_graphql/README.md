@@ -15,17 +15,17 @@ https://demo.nautobot.com/graphql.
 The query language follows the same keys that are exposed by Nautobot's REST API. However,
 under GraphQL, only the requested keys are returned in the reply:
 
-![](2024-06-02-15-28-08.png)
+![](images/2024-06-02-15-28-08.png)
 
 Where a JSON query normally returns object IDs for associated elements which must be queried separately, the GraphQL
 implementation allows for a query that can include elements from those references objects.
 
-![](2024-06-02-15-26-34.png)
+![](images/2024-06-02-15-26-34.png)
 
 
 GraphQL queries can be filtered by values in any of the object's fields, such as name, tags, role, or similar. 
 
-![](2024-06-02-15-30-28.png)
+![](images/2024-06-02-15-30-28.png)
 
 ## API Access
 
