@@ -74,7 +74,7 @@ async def main():
     # this doesn't seem to be needed connecting from an external host. Which seems very strange.
     g = GqlQuery(gql_endpoint=GQL_ENDPOINT,
                  api_token=TOKEN,
-                 with_csrf=False) 
+                 with_csrf=False)
     data = await g.fetch_data('{locations(name: "MCI1") {devices {name}}}')   
     pprint.pprint(data)
 
