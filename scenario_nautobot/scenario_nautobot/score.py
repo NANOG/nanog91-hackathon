@@ -2,6 +2,7 @@
 
 import argparse
 import hashlib
+import os
 import sys
 import pynautobot
 # import colorama
@@ -103,14 +104,13 @@ def main():
         print(f"Challenge {args.challenge} not implemented")
         return 1
 
+    nbserver = os.environ.get("NBSERVER", "http://localhost:80")
     c = challenges[args.challenge]
     if "token" in c and c["token"]:
         try:
             nb = pynautobot.api(
-                url="http://hackathon.twincreeks.net:8003",
+                url=nbserver,
                 token=c["token"],
-                # token="2126afe0cf4cfd8eeb8048a669df9fab2e97c24f",
-                # token="b648cf8a0a0c7e50fd62110e414e672cb61bdcdd",
             )
         except Exception as e:
             print(f"Failed to connect to Nautobot: {e}")
