@@ -8,8 +8,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 import pprint
 
-GQL_ENDPOINT = "http://54.70.170.190:8080/api/graphql/"
-CSRF_TOKEN_ENDPOINT = "http://54.70.170.190:8080/api/"
+# IP is for the Hackathon91 Nautobot instance in AWS
+GQL_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/graphql/"
+CSRF_TOKEN_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/"
+# If committing to code an access token for a RO account for a demo instance
+# of Nautobot with fake data is wrong, I don't wanna be right.
 TOKEN="1dc0438033a3b624e2ddc92995d7d4cd1bdee69a"
 
 
@@ -66,6 +69,9 @@ class GqlQuery:
             return result
 
 async def main():
+    """Putting in this docstring so I don't get fined. Main, obv."""
+    # CSRF seems to be required by Nautobot when I stand up an instance on localhost; however,
+    # this doesn't seem to be needed connecting from an external host. Which seems very strange.
     g = GqlQuery(gql_endpoint=GQL_ENDPOINT,
                  api_token=TOKEN,
                  with_csrf=False)
