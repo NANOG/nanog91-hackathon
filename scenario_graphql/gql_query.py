@@ -11,8 +11,8 @@ import os
 import sys
 
 # Demo Nautobot instance for the hackathon
-GQL_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/graphql/"
-CSRF_TOKEN_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/"
+GQL_ENDPOINT = "https://n91-nautobot.hackathon.nanog.org/api/graphql/"
+CSRF_TOKEN_ENDPOINT = "https://n91-nautobot.hackathon.nanog.org/api/"
 
 """
 API token string can be found on the Admin page in Nautobot.
