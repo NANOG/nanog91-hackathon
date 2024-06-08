@@ -1,36 +1,18 @@
-# topology documentation: http://containerlab.dev/lab-examples/srl-ceos/
 name: nbhack
 
 topology:
   nodes:
-#     ceos1:
-#       kind: arista_ceos
-#       image: ceos:4.32.0.1F
-#       # config: ceos1.cfg
-#       mgmt-ipv4: 172.21.21.2
-#       mgmt-ipv6: 2001:172:21:21::2
-#     ceos2:
-#       kind: arista_ceos
-#       image: ceos:4.32.0.1F
-#       # config: ceos1.cfg
-#       mgmt-ipv4: 172.21.21.3
-#       mgmt-ipv6: 2001:172:21:21::3
-
     nautobot:
       kind: linux
-      # image: networktocode/nautobot-lab
-      image: nautobot-hack:3.0
+      image: ghcr.io/smfeldman/nautobot-hack:3.0
       mgmt-ipv4: 172.21.21.6
       mgmt-ipv6: 2001:172:21:21::6
       binds:
-        - /home/feldman/clab:/clab
+        - .:/clab
       ports:
-        - 8003:8000
-
-#   links:
-#   - endpoints: ["ceos1:eth1", "ceos2:eth1"]
+        - 80:8000
 
 mgmt:
   ipv4-subnet: 172.21.21.0/24 # ip range for the docker network
   ipv6-subnet: 2001:172:21:21::/64
-
+  

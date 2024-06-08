@@ -28,7 +28,7 @@ This section focuses on an introduction to Nautobot's data model and using its w
 - Log into your containerlab host.
 - Ensure that no other containerlab instances are running, then start up your nautobot instance:
 ```
-cd /opt/clab/scenario_nautobot
+cd /home/ubuntu/nanog91-hackathon/scenario_nautobot
 sudo containerlab destroy --all
 sudo containerlab deploy
 ```
@@ -141,14 +141,13 @@ score 2.4
 Note: In this challenge, all prefixes and addresses must be
 in the `hackathon-template-scenario` namespace.
 
-- Create device `leaf5`.
-- Create a new devices `leaf5`, with role `switch_leaf`, device type `Arista cEOS`, location `MCI1`, rack `MCI1-R02`. and status `Active`.  See the table below for additional parameters.
+- Using the API, create a new device `leaf5`, with role `switch_leaf`, device type `Arista cEOS`, location `MCI1`, rack `MCI1-R02`. and status `Active`.  See the table below for additional parameters.
 
 | name  | serial     | position | bgp_asn |
 | ----  | ------     | -------- | ------- |
 | leaf5 | CEOS000014 | U3       | 65014   |
 
-- Add some prefixes for the links to `leaf5`:
+- Using the API, add some prefixes for the links to `leaf5`:
 
 | Prefix | Type |
 | ------  | ---- | 
@@ -157,8 +156,15 @@ in the `hackathon-template-scenario` namespace.
 | 2001:db8:10:10::8/127 |  network |
 | 2001:db8:10:10:1::8/127 | network |
 
+- Run the scoring script and copy/paste the output code as the flag below:
+```
+score 2.5
+```
 
-- Set the following interfaces and connnections on device `leaf5`:
+### Bonus Challenge (not scored):
+If you figure out how to do this part, please share!
+
+- Using the API, set the following interfaces and connnections on device `leaf5`:
 
 | interface | IPv4 addr    | IPv6 addr               | Connected to |
 | --------- | ---------    | ---------               | ------------ |
@@ -167,7 +173,3 @@ in the `hackathon-template-scenario` namespace.
 | Loopback0 | 192.168.0.9/32 | 2001:db8:0:1:1::9/128 | (none) |
 | Management0 | 172.22.0.10/24 | (none) | (none) |
 
-- Run the scoring script and copy/paste the output code as the flag below:
-```
-score 2.5
-```
