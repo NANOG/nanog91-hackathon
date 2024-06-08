@@ -5,14 +5,22 @@ from aiohttp import ClientSession
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 import logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 import pprint
+import os
+import sys
 
 # Demo Nautobot instance for the hackathon
 GQL_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/graphql/"
 CSRF_TOKEN_ENDPOINT = "http://n91-nautobot.hackathon.nanog.org:8080/api/"
-# Yes, GitGuardian, this is fine :) 
-TOKEN="1dc0438033a3b624e2ddc92995d7d4cd1bdee69a"
+
+"""
+API token string can be found on the Admin page in Nautobot.
+Ether fill in the constant below, or set NB_API_TOKEN environment variable.
+"""
+# NB_API_TOKEN:str = "changeme"
+# Comment below out if you're filling in the key above
+NB_API_TOKEN: None = None
 
 
 class GqlQuery:
@@ -69,11 +77,20 @@ class GqlQuery:
 
 async def main():
     """Putting in this docstring so I don't get fined. Main, obv."""
+    
+    # API Token is either defined above, or set as an environmet var
+    if NB_API_TOKEN:
+        nb_api_token: str = NB_API_TOKEN
+    else:
+        nb_api_token: str = os.environ.get('NB_API_TOKEN')
+        if not nb_api_token:
+            logging.fatal("Must define NB_API_TOKEN!")
+            sys.exit(1)
     # CSRF seems to be required by Nautobot when I stand up an instance on localhost; however,
     # this doesn't seem to be needed connecting from an external host. Which seems very strange.
-    # Either way, you can update the arg if it's needed.
+    # Either way, you can update the arg if it's needed.        
     g = GqlQuery(gql_endpoint=GQL_ENDPOINT,
-                 api_token=TOKEN,
+                 api_token=nb_api_token,
                  with_csrf=False)
     # Sample query
     data = await g.fetch_data('{locations(name: "MCI1"){name facility}}')
