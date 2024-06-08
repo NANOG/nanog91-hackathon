@@ -7,9 +7,11 @@ router bgp {{ bgp_asn }}
    neighbor SPINE_IP6 send-community extended
 {%- for neighbor in bgp_neighbors.bgp_neighbors_ip4 %}
    neighbor {{ neighbor.addr }} peer group SPINE
+   neighbor description {{ neighbor.description }}
    neighbor {{ neighbor.addr }} remote-as {{ neighbor.asn }}
    {%- endfor %}
 {%- for neighbor in bgp_neighbors.bgp_neighbors_ip6 %}
    neighbor {{ neighbor.addr }} peer group SPINE_IP6
+   neighbor description {{ neighbor.description }}
    neighbor {{ neighbor.addr }} remote-as {{ neighbor.asn }}
 {%- endfor %}
