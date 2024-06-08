@@ -32,6 +32,8 @@ if not demo:
         device_type={"model": "cEOS"},
         location={"name": "MCI1"},
         status="Active",
+        custom_fields={"bgp_asn": "65550"}
+
     )
     print("Created device named 'demo'")
 

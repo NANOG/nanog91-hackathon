@@ -162,20 +162,11 @@ def score_2_2(nb, verbose=False):
         print(f"return code={response.status_code}")
         print(response.json)
     devices = response.json['data']['devices']
-
+    if len(devices) != 1:
+        print("Unable to find device 'test-switch'.")
+        return None
     return score_hash(devices[0])
-    # devices = response.json['data']['devices']
-    # device = {}
-    # for dev in devices:
-    #     device[dev['name']] = dev
-    # if verbose:
-    #     print(f"device={device}")
-
-    # if 'leaf3' not in device or 'leaf4' not in device:
-    #     print("Unable to find one or both new devices.")
-    #     return None
-    
-    # return score_hash(device['leaf3'], device['leaf4'])
+ 
 
 def score_2_4(nb, verbose=False):
     dev = nb.dcim.device_types.get(model="vEOS")
@@ -185,6 +176,56 @@ def score_2_4(nb, verbose=False):
         print("vEOS device type still exists.")
         return None
 
+
+def score_2_5(nb, verbose=False):
+    query1 = """
+{
+  devices(name: "leaf5") {
+    name
+    serial
+    role {
+      name
+    }
+    device_type {
+      model
+    }
+    status {
+      name
+    }
+    location {
+      name
+    }
+    rack {
+      name
+    }
+    position
+    _custom_field_data
+  }
+}
+"""
+    query2 = """
+{
+  prefixes(
+    namespace: "hackathon-template-scenario"
+    prefix: ["10.10.0.8/31", "10.10.1.8/31", "2001:db8:10:10::8/127", "2001:db8:10:10:1::8/127"]
+  ) {
+    prefix
+    type
+  }
+}
+"""
+    response1 = nb.graphql.query(query=query1)
+    if verbose:
+        print(f"return code={response1.status_code}")
+        print(response1.json)
+    leaf5 = response1.json['data']['devices'][0]
+
+    response2 = nb.graphql.query(query=query2)
+    if verbose:
+        print(f"return code={response2.status_code}")
+        print(response2.json)
+    prefixes = response2.json['data']['prefixes']
+    return score_hash(leaf5, prefixes)
 
 RO_TOKEN = "1dc0438033a3b624e2ddc92995d7d4cd1bdee69a"
 RW_TOKEN = "2126afe0cf4cfd8eeb8048a669df9fab2e97c24f"
@@ -199,6 +240,7 @@ challenges = {
     "2.2": { "token": RW_TOKEN, "scorer": score_2_2 },
     "2.3": { "token": RW_TOKEN, "scorer": score_2_2 },  # Same as 2.2!
     "2.4": { "token": RW_TOKEN, "scorer": score_2_4 },
+    "2.5": { "token": RW_TOKEN, "scorer": score_2_5 },
 }
 
 def main():
