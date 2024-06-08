@@ -1,4 +1,4 @@
-router bgp {{ local_asn }}
+router bgp {{ bgp_asn }}
    no bgp default ipv4-unicast
    maximum-paths 8 ecmp 64
    neighbor SPINE peer group
