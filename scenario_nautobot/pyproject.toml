@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "scenario-nautobot"
+version = "0.1.0"
+description = ""
+authors = ["Steve Feldman <feldman@twincreeks.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+colorama = "^0.4.6"
+setuptools = "^70.0.0"
+pynautobot = "^2.2.0"
+
+[tool.poetry.scripts]
+score = 'scenario_nautobot.score:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
