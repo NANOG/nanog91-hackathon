@@ -32,33 +32,8 @@ GraphQL queries can be filtered by values in any of the object's fields, such as
 The included gql_query python module provides a class and a reference implementation of a GQL query; use this for
 your experimentation. Note that the model is async, which requires that it be called using async methods.
 
-
-**CHALLENGE 1:**
-Write a GraphQL query that returns the names and id values of all devices that are in the site named "MCI1".
-These should be the only values returned by the query. Extraneous data will not be accepted as part of the solution.
-Submit the results of the query to CTFd.
-
-**CHALLENGE 2:**
-
-Write a QraphQL query that returns data about a device named "spine1". The return data should consist of:
-- device id
-- device name
-- The IPv4 and IPv6 addresses/masks assigned to the "Ethernet1" interface.
-
-Note: The above data points should be the *only* data returned by the query. Submit the results of the query to CTFd.
-
-**CHALLENGE 3:**
-
-Write a GraphQL query that for the device named "leaf1", returns the following data:
-- The IPv4 and IPv6 addresses of each connected device for interfaces with the "interface-fabric" tag assigned.
-- The hostname and bgp_asn custom field value for the connected device.
-
-Note: The above data points should be the *only* data returned by the query. Submit the results of the query to CTFd.
-
-**CHALLENGE 4:**
-
-Given the included jinja2 template, write a python script that usese GraphQL to query the above data for the device named "leaf1", then renders a BGP configuration section via jinja2.
-Submit the resulting configuration file to CTFd.
+## Challenges
+Challenges for this scenario are in CTFd. Start at https://ctfd.hackathon.nanog.org/challenges#NB%203.1%20Basic%20GQL%20Query-10 and go from there.
 
 ## Development Environment
 Note that this repo uses [[Poetry](https://python-poetry.org/)] to manage dependencies. Follow [[instructions](https://python-poetry.org/docs/#installing-with-pipx)] to install, then run the following to activate a venv with needed dependencies (ensure you are in this directory)
