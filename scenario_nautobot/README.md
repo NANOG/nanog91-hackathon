@@ -28,7 +28,7 @@ This section focuses on an introduction to Nautobot's data model and using its w
 - Log into your containerlab host.
 - Ensure that no other containerlab instances are running, then start up your nautobot instance:
 ```
-cd /home/ubuntu/nanog91-hackathon/scenario_nautobot
+cd ~/clab/n91/scenario_nautobot
 sudo containerlab destroy --all
 sudo containerlab deploy
 ```
